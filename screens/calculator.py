@@ -161,7 +161,7 @@ class Calculator(QWidget):
         self.operation = None
         self.answerLabel.adjustSize()
 
-    def setupButton(self, button_variable, text, func):
+    def setupButton(self, text, func):
         button_variable = QPushButton(text, parent=self)
         button_variable.clicked.connect(lambda: func(text))
         button_variable.setObjectName(text)
@@ -175,38 +175,63 @@ class Calculator(QWidget):
 
         row0 = QHBoxLayout()
 
-        row0.addWidget(self.setupButton(self.square_button, "^2", self.squared), 3)
-        row0.addWidget(self.setupButton(self.exponent_button, "/", self.divide), 3)
-        row0.addWidget(self.setupButton(self.reset_button, "C", self.reset), 3)
-        row0.addWidget(self.setupButton(self.backspace_button, "<-", self.backspace), 3)
+        self.square_button = self.setupButton("^2", self.squared)
+        self.exponent_button = self.setupButton("/", self.divide)
+        self.reset_button = self.setupButton("C", self.reset)
+        self.backspace_button = self.setupButton("<-", self.backspace)
+
+        row0.addWidget(self.square_button, 3)
+        row0.addWidget(self.exponent_button, 3)
+        row0.addWidget(self.reset_button, 3)
+        row0.addWidget(self.backspace_button, 3)
 
         row1 = QHBoxLayout()
 
-        row1.addWidget(self.setupButton(self.number1, "1", self.number_pressed), 3)
-        row1.addWidget(self.setupButton(self.number2, "2", self.number_pressed), 3)
-        row1.addWidget(self.setupButton(self.number3, "3", self.number_pressed), 3)
-        row1.addWidget(self.setupButton(self.add_button, "+", self.add), 3)
+        self.number1 = self.setupButton("1", self.number_pressed)
+        self.number2 = self.setupButton("2", self.number_pressed)
+        self.number3 = self.setupButton("3", self.number_pressed)
+        self.add_button = self.setupButton("+", self.add)
+
+        row1.addWidget(self.number1, 3)
+        row1.addWidget(self.number2, 3)
+        row1.addWidget(self.number3, 3)
+        row1.addWidget(self.add_button, 3)
 
         row2 = QHBoxLayout()
 
-        row2.addWidget(self.setupButton(self.number4, "4", self.number_pressed), 3)
-        row2.addWidget(self.setupButton(self.number5, "5", self.number_pressed), 3)
-        row2.addWidget(self.setupButton(self.number6, "6", self.number_pressed), 3)
-        row2.addWidget(self.setupButton(self.subtract_button, "-", self.subtract), 3)
+        self.number4 = self.setupButton("4", self.number_pressed)
+        self.number5 = self.setupButton("5", self.number_pressed)
+        self.number6 = self.setupButton("6", self.number_pressed)
+        self.subtract_button = self.setupButton("-", self.subtract)
+
+        row2.addWidget(self.number4, 3)
+        row2.addWidget(self.number5, 3)
+        row2.addWidget(self.number6, 3)
+        row2.addWidget(self.subtract_button, 3)
 
         row3 = QHBoxLayout()
 
-        row3.addWidget(self.setupButton(self.number7, "7", self.number_pressed), 3)
-        row3.addWidget(self.setupButton(self.number8, "8", self.number_pressed), 3)
-        row3.addWidget(self.setupButton(self.number9, "9", self.number_pressed), 3)
-        row3.addWidget(self.setupButton(self.multiply_button, "x", self.multiply), 3)
+        self.number7 = self.setupButton("7", self.number_pressed)
+        self.number8 = self.setupButton("8", self.number_pressed)
+        self.number9 = self.setupButton("9", self.number_pressed)
+        self.multiply_button = self.setupButton("x", self.multiply)
+
+        row3.addWidget(self.number7, 3)
+        row3.addWidget(self.number8, 3)
+        row3.addWidget(self.number9, 3)
+        row3.addWidget(self.multiply_button, 3)
 
         row4 = QHBoxLayout()
 
-        row4.addWidget(self.setupButton(self.negate_button, "+/-", self.negate), 3)
-        row4.addWidget(self.setupButton(self.number0, "0", self.number_pressed), 3)
-        row4.addWidget(self.setupButton(self.decimal_button, ".", self.number_pressed), 3)
-        row4.addWidget(self.setupButton(self.equals_button, "=", self.equate), 3)
+        self.negate_button = self.setupButton("+/-", self.negate)
+        self.number0 = self.setupButton("0", self.number_pressed)
+        self.decimal_button = self.setupButton(".", self.number_pressed)
+        self.equals_button = self.setupButton("=", self.equate)
+
+        row4.addWidget(self.negate_button, 3)
+        row4.addWidget(self.number0, 3)
+        row4.addWidget(self.decimal_button, 3)
+        row4.addWidget(self.equals_button, 3)
 
         self.design_layout.addLayout(answer_row)
         self.design_layout.addLayout(row0)
