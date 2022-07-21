@@ -1,3 +1,4 @@
+from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import QLabel, QPushButton, QHBoxLayout, QVBoxLayout, QWidget
 
 
@@ -40,7 +41,7 @@ class Calculator(QWidget):
         self.backspace_button = None
         self.answerLabel = None
         self.isNegate = False
-        self.setGeometry(500, 100, 500, 300)
+        self.setGeometry(800, 200, 500, 300)
         self.setWindowTitle("Scientific Calculator")
 
     def number_pressed(self, num):
@@ -152,7 +153,8 @@ class Calculator(QWidget):
 
     def update_answer(self):
         self.answerLabel.setText(self.answer)
-        self.answerLabel.adjustSize()
+        if self.answer != "0":
+            self.answerLabel.adjustSize()
 
     def invalid_operation(self):
         self.answerLabel.setText("Invalid Operation")
@@ -165,12 +167,29 @@ class Calculator(QWidget):
         button_variable = QPushButton(text, parent=self)
         button_variable.clicked.connect(lambda: func(text))
         button_variable.setObjectName(text)
+        button_variable.setStyleSheet("QPushButton::hover"
+                                      "{"
+                                      "background-color : lightgreen;"
+                                      "}"
+                                      "QPushButton"
+                                      "{"
+                                      "background-color : lightblue;"
+                                      "}"
+                                      "QPushButton::pressed"
+                                      "{"
+                                      "background-color : red;"
+                                      "}"
+                                      )
+        button_variable.setFont(QFont('Open Sans', 10))
         return button_variable
 
     def setupUi(self):
         answer_row = QHBoxLayout()
 
         self.answerLabel = QLabel(self.answer, parent=self)
+        self.answerLabel.setStyleSheet("background-color: yellow;"
+                                       "border: 1px solid black;")
+        self.answerLabel.setFont(QFont('Open Sans', 15))
         answer_row.addWidget(self.answerLabel)
 
         row0 = QHBoxLayout()
@@ -235,9 +254,9 @@ class Calculator(QWidget):
 
         self.design_layout.addLayout(answer_row)
         self.design_layout.addLayout(row0)
-        self.design_layout.addLayout(row1)
-        self.design_layout.addLayout(row2)
         self.design_layout.addLayout(row3)
+        self.design_layout.addLayout(row2)
+        self.design_layout.addLayout(row1)
         self.design_layout.addLayout(row4)
 
         self.setLayout(self.design_layout)
